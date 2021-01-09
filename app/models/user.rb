@@ -14,7 +14,7 @@ class User < ApplicationRecord
   attachment :profile_image, destroy: false
   validates :introduction, length: {maximum: 50}
   validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true
-  
+
   # ユーザーをフォローする
   def follow(user_id)
     follower.create(followed_id: user_id)
@@ -29,18 +29,18 @@ class User < ApplicationRecord
   def following?(user)
     following_user.include?(user)
   end
-  
+
   def self.search(search, word)
     if search == "forward_match"
-    　@user = User.where("name LIKE?", "#{word}%")
+      @user = User.where("name LIKE?", "#{word}%")
     elsif search == "backward_match"
-    　@user = User.where("name LIKE?", "%#{word}")
+      @user = User.where("name LIKE?", "%#{word}")
     elsif search == "perfect_match"
-    　@user = User.where("#{word}")
+      @user = User.where("#{word}")
     elsif search == "partial_match"
-    　@user = User.where("name LIKE?", "%#{word}%")
+      @user = User.where("name LIKE?", "%#{word}%")
     else
-    　@user = User.all
+      @user = User.all
     end
   end
 end

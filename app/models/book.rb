@@ -17,6 +17,7 @@ def self.search(search, word)
     elsif search == "perfect_match"
      @book = Book.where("#{word}")
     elsif search == "partial_match"
+
      @book = Book.where("title LIKE?","%#{word}%")
     else
      @book = Book.all
